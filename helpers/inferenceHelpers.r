@@ -1,6 +1,6 @@
 makeModel <- function(header) {
   
-  return(paste(read_file(header), read_file("../../../../_shared/engine_v2.txt"), sep = "\n"))
+  return(paste(read_file(header), read_file("models/engine.txt"), sep = "\n"))
   
 }
 
@@ -46,10 +46,10 @@ estimate_mode <- function(s) {
 }
 
 getEstimates <- function(posteriors) {
-
+  
   estimates <- posteriors %>%
     group_by(Parameter) %>%
-    summarize(estimate = estimate_mode(value)) %>%
+    dplyr::summarize(estimate = estimate_mode(value)) %>%
     mutate(estimate = ifelse(estimate < 0, 0, estimate)) %>%
     pivot_wider(names_from = Parameter, values_from = estimate)
   
@@ -61,11 +61,11 @@ wrapPrediction = function(model, estimates, overmodifyingUtterance, targetRefere
   
   if(inferenceType == "incrementalContinuous" | inferenceType == "incremental" ) {
     
-    predictionCommand <- read_file("../_shared/inferenceCommands/main/getIncrementalPredictions.txt")
+    predictionCommand <- read_file("models/getIncrementalPredictions.txt")
     
   } else if (inferenceType == "continuous" | inferenceType == "vanilla" ) {
     
-    predictionCommand <- read_file("../_shared/inferenceCommands/main/getGlobalPredictions.txt")
+    predictionCommand <- read_file("models/getGlobalPredictions.txt")
     
   }
   

@@ -68,6 +68,12 @@ graphNoisePosteriors <- function(posteriors) {
                  strip.text      = element_text(size = 6 * scale_value,margin=margin(t=4,r=4,b=4,l=4,unit="pt")))) 
 }
 
+graphPosteriors <- function(posteriors) {
+  return(ggplot(posteriors, aes(x = value)) +
+           theme_bw() +
+           facet_wrap(~Parameter, scales = "free") +
+           geom_density(alpha = 0.05))
+}
 
 graphPredictives <- function(predictives, df) {
   

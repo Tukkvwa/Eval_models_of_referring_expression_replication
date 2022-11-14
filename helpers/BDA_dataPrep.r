@@ -15,16 +15,16 @@ getStates = function(condName) {
   
   if(sufficientDimension == "color") {
     
-  states <- append(states, replicate(numShared, "otherColor_size"))
-  states <- append(states, replicate(numDiff, "otherColor_otherSize"))
+    states <- append(states, replicate(numShared, "otherColor_size"))
+    states <- append(states, replicate(numDiff, "otherColor_otherSize"))
     
   } else if(sufficientDimension == "size") {
     
-  states <- append(states, replicate(numShared, "color_otherSize"))
-  states <- append(states, replicate(numDiff, "otherColor_otherSize"))
+    states <- append(states, replicate(numShared, "color_otherSize"))
+    states <- append(states, replicate(numDiff, "otherColor_otherSize"))
     
   }
-
+  
   return(unlist(states))
   
 }
@@ -36,7 +36,7 @@ getUtterances = function(states, language) {
   utterances = c()
   
   for(state in states) {
-  
+    
     one_word_utterances = str_split(state, "_")
     utterances = append(utterances,one_word_utterances)
     
@@ -51,7 +51,7 @@ getUtterances = function(states, language) {
     }
     
     utterances = append(utterances,two_word_utterance)
-  
+    
   }
   
   # print(utterances)
